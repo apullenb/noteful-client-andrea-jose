@@ -4,10 +4,26 @@ import NotesContext from '../NotesContext'
 class AddNote extends Component {
     static contextType = NotesContext;
 
-    render() { 
+    handleAddNewNote = (event) => {
         console.log(this.context);
+        event.preventDefault();
+        let note = this.context.noteNameDraft;
+        console.log(note);
+        let content = this.context.noteContentDraft;
+        console.log(content);
+        const newNote = JSON.stringify( { name: note, content: content });
+        fetch(`http://localhost:9090/notes`, {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          }, body: newNote
+        })
+    }
+
+
+    render() { 
         return (
-            <form className="registration" onSubmit={e => this.handleAdd(e)}>
+            <form className="registration" onSubmit={e => this.handleAddNewNote(e)}>
                 <h2>Create Note Name</h2>
                 <div className="registration__hint">* required field</div>
                 <div className="form-group">
@@ -22,12 +38,12 @@ class AddNote extends Component {
                 {/* {this.state.name.touched && <ValidationError message={nameError} />} */}
                 </div>
                 <div className="form-group">
-                <label htmlFor="name">Description *</label>
+                <label htmlFor="content">Description *</label>
                 <input
                     type="textarea"
                     className="registration__control"
-                    name="name"
-                    id="name"
+                    name="content"
+                    id="content"
                     onChange={e => this.context.updateNoteContent(e.target.value)}
                 />
                 {/* {this.state.name.touched && <ValidationError message={nameError} />} */}

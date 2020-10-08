@@ -92,38 +92,50 @@ class App extends Component {
         }) 
     }
 
-    handleAdd = (event) => {
-        
-        event.preventDefault();
-        //...
+    handleAddNewNote = (noteNameDraft, noteContentDraft) => {
+        const noteName = this.state.noteNameDraft;
+        const noteContent = this.state.noteContentDraft;
+
+        // this.setState({
+        //     noteNameDraft: noteName,
+        //     noteContentDraft: noteContent
+        // })
+        // console.log(noteName);
+        // console.log(noteContent);
+    }
+
+    handleAddFolder = (folderNameDraft) => {
+        const folderName = this.state.folderNameDraft;
     }
 
     updateNoteName = (name) => {
         this.setState({
             noteNameDraft: name,
         });
-        console.log(name);
+        // console.log(name);
     }
 
     updateNoteContent = (name) => {
         this.setState({
             noteContentDraft: name,
         });
-        console.log(name);
+        // console.log(name);
     }
 
     updateFolderName = (name) => {
         this.setState({
             folderNameDraft: name,
         });
-        console.log(name);
+        // console.log(name);
     }
 
     render() {
         return (
             <NotesContext.Provider
-                value={{ notes: this.state.notes, folders: this.state.folders, deleteNote: this.deleteNote, 
-                            updateNoteName: this.updateNoteName, updateNoteContent: this.updateNoteContent, updateFolderName: this.updateFolderName }}>
+                value={{ notes: this.state.notes, folders: this.state.folders, 
+                            noteNameDraft: this.state.noteNameDraft, noteContentDraft: this.state.noteContentDraft, folderNameDraft: this.state.folderNameDraft,
+                            deleteNote: this.deleteNote, updateNoteName: this.updateNoteName, updateNoteContent: this.updateNoteContent, 
+                            updateFolderName: this.updateFolderName, handleAddFolder: this.handleAddNewNote }}>
                 <div className="App">
                     <nav className="App__nav">{this.renderNavRoutes()}</nav>
                     <header className="App__header">
