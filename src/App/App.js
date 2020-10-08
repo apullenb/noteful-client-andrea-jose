@@ -8,6 +8,10 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import './App.css';
 import NotesContext from '../NotesContext'
 
+//1. You will add two forms for POSTing new folders and new Notes to the server
+//2. You will also add error boundaries at appropriate places in the structure
+//3. Finally you will refactor the components to use PropTypes to validate the props
+
 class App extends Component {
     state = {
         notes: [],
