@@ -15,8 +15,14 @@ import NotesContext from '../NotesContext'
 class App extends Component {
     state = {
         notes: [],
-        folders: []
+        folders: [],
+        name: {
+            value: "hello",
+            touched: false
+          }
     };
+
+
 
     notefulFetch = (url, options) => {
         return fetch(url)
@@ -83,6 +89,14 @@ class App extends Component {
            notes
         }) 
     }
+
+    handleAdd = (event) => {
+        event.preventDefault();
+        const name = this.state.name.value;
+        console.log(name);
+    }
+
+    
 
     render() {
         return (
