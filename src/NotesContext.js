@@ -2,7 +2,11 @@ import React from 'react'
 
 const NotesContext = React.createContext({
     notes: [],
-    folders: []
+    folders: [],
+    name: {
+        value: "hello",
+        touched: false
+      }
 })
 
 export default NotesContext

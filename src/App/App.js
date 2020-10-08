@@ -8,6 +8,9 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import './App.css';
 import NotesContext from '../NotesContext'
 
+import AddFolder from '../AddFolder/AddFolder'
+import AddNote from '../AddNote/AddNote'
+
 //1. You will add two forms for POSTing new folders and new Notes to the server
 //2. You will also add error boundaries at appropriate places in the structure
 //3. Finally you will refactor the components to use PropTypes to validate the props
@@ -16,10 +19,9 @@ class App extends Component {
     state = {
         notes: [],
         folders: [],
-        name: {
-            value: "hello",
-            touched: false
-          }
+        noteNameDraft: '',
+        noteContentDraft: '',
+        folderNameDraft: ''
     };
 
 
@@ -91,17 +93,37 @@ class App extends Component {
     }
 
     handleAdd = (event) => {
+        
         event.preventDefault();
-        const name = this.state.name.value;
+        //...
+    }
+
+    updateNoteName = (name) => {
+        this.setState({
+            noteNameDraft: name,
+        });
         console.log(name);
     }
 
-    
+    updateNoteContent = (name) => {
+        this.setState({
+            noteContentDraft: name,
+        });
+        console.log(name);
+    }
+
+    updateFolderName = (name) => {
+        this.setState({
+            folderNameDraft: name,
+        });
+        console.log(name);
+    }
 
     render() {
         return (
             <NotesContext.Provider
-                value={{ notes: this.state.notes, folders: this.state.folders, deleteNote: this.deleteNote }}>
+                value={{ notes: this.state.notes, folders: this.state.folders, deleteNote: this.deleteNote, 
+                            updateNoteName: this.updateNoteName, updateNoteContent: this.updateNoteContent, updateFolderName: this.updateFolderName }}>
                 <div className="App">
                     <nav className="App__nav">{this.renderNavRoutes()}</nav>
                     <header className="App__header">
@@ -111,6 +133,8 @@ class App extends Component {
                         </h1>
                     </header>
                     <main className="App__main">{this.renderMainRoutes()}</main>
+                    <AddFolder />
+                    <AddNote />
                 </div>
             </NotesContext.Provider>
         );
